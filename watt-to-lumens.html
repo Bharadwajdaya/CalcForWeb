@@ -1,0 +1,78 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+	<div>
+Watts to lumens calculator
+</div>
+<div>
+Enter power in watts:
+</div>
+<input placeholder="Enter power in watts:" id="power">
+<div>
+Select light source
+</div>
+<select id="source" onchange="luminouseefficacy()">
+       <option>Tungsten incandescent light bulb</option>
+				<option>Halogen lamp</option>
+				<option>Fluorescent lamp</option>
+				<option>LED lamp</option>
+				<option>Metal halide lamp</option>
+				<option>High pressure sodium vapor lamp</option>
+				<option>Low pressure sodium vapor lamp</option>
+				<option>Mercury vapor lamp</option>
+</select>
+<div>
+Or enter luminous efficacy in lumens per watt:
+</div>
+<input placeholder="luminous efficacy" id="effi">
+<div id="ans">
+  0
+</div>
+<button onclick="calculate()">
+calculate
+</button>
+</body>
+<script>
+function luminouseefficacy()
+{
+  var source=$("#source option:selected").text();
+  switch(source)
+  {
+   case "Tungsten incandescent light bulb":
+   factor=15;
+   break;
+   case "Halogen lamp":
+   factor=20;
+   break;
+   case "Fluorescent lamp":
+   factor=60;
+   break;
+   case "LED lamp":
+   factor=90;
+   break;
+    case "Metal halide lamp":
+   factor=87;
+   break;
+   case "High pressure sodium vapor lamp":
+   factor=117;
+   break;
+   case "Low pressure sodium vapor lam":
+   factor=150;
+   break;
+   case "Mercury vapor lamp":
+   factor=50;
+   break;
+  }
+  $("#effi").val(factor);
+}
+function calculate()
+{
+	var pow=$("#power").val();
+  var effi=$("#effi").val();
+  var ans=pow*effi;
+  $("#ans").html(ans);
+}
+</script>
+</html>
