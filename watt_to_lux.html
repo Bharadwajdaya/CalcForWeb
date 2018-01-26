@@ -1,0 +1,128 @@
+<html>
+<head>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+	<div>
+Watts to lux calculator
+</div>
+<div>
+Enter power in watts:
+</div>
+<input placeholder="Enter power in watts:" id="power">
+<div>
+Select light source
+</div>
+<select id="source" onchange="luminouseefficacy()">
+       <option>Tungsten incandescent light bulb</option>
+				<option>Halogen lamp</option>
+				<option>Fluorescent lamp</option>
+				<option>LED lamp</option>
+				<option>Metal halide lamp</option>
+				<option>High pressure sodium vapor lamp</option>
+				<option>Low pressure sodium vapor lamp</option>
+				<option>Mercury vapor lamp</option>
+</select>
+<div>
+Or enter luminous efficacy in lumens per watt:
+</div>
+<input placeholder="luminous efficacy" id="effi">
+<div>
+Enter surface area:
+</div>
+<input id="surface_area" onchange="sphricalRadVal()" placeholder="surface_area"/>
+<select id="first_unit" onchange="sphercalradiusunitchange()">
+<option>m²</option>
+<option>ft²</option>
+</select>
+<div>
+Or enter spherical radius:
+</div>
+<input id="sph_rad" onchange="surfacearea()" placeholder="spherical radius"/>
+<select id="second_unit" onchange="surfaceareaunitchange();">
+<option>m</option>
+<option>ft</option>
+</select>
+<div id="ans">
+  0
+</div>
+<button style="display:block" onclick="calculate()">
+Calculate
+</button>
+
+</body>
+<script>
+function surfacearea()
+{
+	var sphrad=$("#sph_rad").val();
+  var surfacearea=4*Math.PI*sphrad*sphrad;
+  $("#surface_area").val(surfacearea);
+}
+function luminouseefficacy()
+{
+  var source=$( "#source option:selected" ).text();
+  switch(source)
+  {
+   case "Tungsten incandescent light bulb":
+   factor=15;
+   break;
+   case "Halogen lamp":
+   factor=20;
+   break;
+   case "Fluorescent lamp":
+   factor=60;
+   break;
+   case "LED lamp":
+   factor=90;
+   break;
+    case "Metal halide lamp":
+   factor=87;
+   break;
+   case "High pressure sodium vapor lamp":
+   factor=117;
+   break;
+   case "Low pressure sodium vapor lam":
+   factor=150;
+   break;
+   case "Mercury vapor lamp":
+   factor=50;
+   break;
+  }
+  $("#effi").val(factor);
+}
+function surfaceareaunitchange()
+{
+	var sour=document.getElementById("second_unit").selectedIndex;
+  document.getElementById("first_unit").selectedIndex=sour;
+}
+function sphercalradiusunitchange()
+{
+	var sour=document.getElementById("first_unit").selectedIndex;
+  document.getElementById("second_unit").selectedIndex=sour;
+  
+}
+function sphricalRadVal()
+{
+	var rad=$("#surface_area").val();
+	var val = Math.sqrt(rad/(4*Math.PI));
+  $("#sph_rad").val(val);
+}
+function calculate()
+{
+	var lum_effi=$("#effi").val();
+  var power=$("#power").val();
+  var surface_area=$("#surface_area").val();
+	var ans=10.76391*lum_effi*power
+  if(document.getElementById("first_unit").selectedIndex==1)
+  {
+  	ans=(10.76391*lum_effi*power)/surface_area;
+  }
+  else
+  {
+  	ans=(lum_effi*power)/surface_area;
+  }
+  $("#ans").html(ans);
+}
+</script>
+</html>

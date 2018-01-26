@@ -1,0 +1,40 @@
+<html>
+<head>
+	<meta charset="utf-8">
+ 	<title>Calculator</title>
+  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+	<h1>Lumen to lux calculator</h1>
+	<input id="lum_flux" placeholder="Enter luminous flux in lumens:">
+	<input id="sperical-radius" placeholder="Enter radius">
+	<input id="spericalSur" placeholder="Enter surface area">
+	<select id="sel">
+		<option>feet</option>
+		<option>meter</option>
+	</select>
+	<div id="ans"></div>
+	<button id="calc_illu">calculate</button>
+</body>
+<script>
+
+	$("#calc_illu").click(function(){
+		var lumFlux=$("#lum_flux").val();
+		var sperRadius=$("#sperical-radius").val();
+		var sur=(4* 3.14 *sperRadius*sperRadius);
+		var ans=10.76391*lumFlux/(4* 3.14 *sperRadius*sperRadius);
+		$("#ans").html(ans);
+		$("#spericalSur").val(sur);
+	});
+	$("#sperical-radius").focusout(function(){
+		var sperRadius=$("#sperical-radius").val();
+		var sur=(4* 3.14 *sperRadius*sperRadius);
+		$("#spericalSur").val(sur);
+	});
+	$("#spericalSur").focusout(function(){
+		var Radius=$("#spericalSur").val();
+		var sur=Math.sqrt(Radius/(4*Math.PI));
+		$("#sperical-radius").val(sur);
+	});
+</script>
+</html>

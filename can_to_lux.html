@@ -1,0 +1,41 @@
+<html>
+<head>
+	<meta charset="utf-8">
+ 	<title>Calculator</title>
+  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+	<h1>Candela to lux calculation</h1>
+	<input id="lum_intensity" placeholder="Enter luminous intensity in candela:">
+	<input id="distance" placeholder="Enter distance and select feet or meters">
+	<select id="sel">
+		<option>feet</option>
+		<option>meter</option>
+	</select>
+	<div id="ans"></div>
+	<button id="calc_can_to_lux">calculate</button>
+</body>
+<script>
+	$("#calc_can_to_lux").click(function(){
+		var lum_intensity=$("#lum_intensity").val();
+		var distance=getFeetOrMeter();
+
+		var toLux=10.76391*(lum_intensity/(distance*distance));
+		$("#ans").html(toLux);
+
+	});
+	function getFeetOrMeter()
+	{
+	 var ddl = document.getElementById("sel");
+	 var selectedValue = ddl.options[ddl.selectedIndex].value;
+	 var value=0;
+	 value=$("#distance").val();
+	   if (selectedValue == "meter")
+	   {
+	   		value=3.28084*value;
+	   		console.log(value);
+	   }
+	   return value;
+	}
+</script>
+</html>

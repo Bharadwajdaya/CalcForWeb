@@ -1,0 +1,27 @@
+<html>
+<head>
+	<meta charset="utf-8">
+ 	<title>Calculator</title>
+  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+	<h1>Candela to lumens calculator</h1>
+	<input id="Lum_inten" placeholder="Lum_inten">
+	<input id="apex_deg" placeholder="apex_deg">
+	<div id="lum_flux"></div>
+	<button id="cal_lum_flux">Calculate</button>
+</body>
+<script>
+$("#cal_lum_flux").click(function(){
+	var Lum_inten=$("#Lum_inten").val();
+	var apex_deg=$("#apex_deg").val();
+	var lum_flux=Lum_inten*(2*Math.PI*(1-cosDegrees(apex_deg/2)));
+	$("#lum_flux").html(lum_flux);
+});
+
+function cosDegrees(angle)
+{
+	return Math.cos(angle/180*Math.PI);
+}
+</script>
+</html>
